@@ -43,8 +43,6 @@ export declare class Store<S> {
   }): void;
 }
 
-export const storeKey: string;
-
 export function createStore<S>(options: StoreOptions<S>): Store<S>;
 
 export function useStore<S = any>(injectKey?: InjectionKey<Store<S>> | string): Store<S>;
@@ -132,7 +130,7 @@ export interface Module<S, R> {
   getters?: GetterTree<S, R>;
   actions?: ActionTree<S, R>;
   mutations?: MutationTree<S>;
-  modules?: ModuleTree<R>;
+  modules?: ModuleTree<S, R>;
 }
 
 export interface ModuleOptions {
@@ -151,8 +149,8 @@ export interface MutationTree<S> {
   [key: string]: Mutation<S>;
 }
 
-export interface ModuleTree<R> {
-  [key: string]: Module<any, R>;
+export interface ModuleTree<S, R> {
+  [key: string]: Module<S, R>;
 }
 
 declare const _default: {
